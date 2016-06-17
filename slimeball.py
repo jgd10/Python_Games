@@ -50,7 +50,7 @@ import random
 import slimeball_levels as slv
 
 
-WIDTH = 1100.
+WIDTH = 1000.
 HEIGHT = 500.
 BALL_RADIUS = 14.
 BALL_R = BALL_RADIUS
@@ -113,8 +113,10 @@ def draw_movable_items():
     global ball, ball_pos, slime
     ball_pos = [WIDTH/4., HEIGHT-BALL_R-SLIME_R]
     ball       = canvas.create_oval(ball_bbox(ball_pos),fill=BALL_COLOUR)
-    slime      = canvas.create_arc((WIDTH/4.)-SLIME_R,HEIGHT-SLIME_R,(WIDTH/4.)+SLIME_R,HEIGHT+SLIME_R, \
-                                          fill=SLIME_COLOUR,extent=180)
+    #slime      = canvas.create_arc((WIDTH/4.)-SLIME_R,HEIGHT-SLIME_R,(WIDTH/4.)+SLIME_R,HEIGHT+SLIME_R, \
+    #                                      fill=SLIME_COLOUR,extent=180)
+    slime      = canvas.create_oval((WIDTH/4.)-SLIME_R,HEIGHT-SLIME_R,(WIDTH/4.)+SLIME_R,HEIGHT+SLIME_R, \
+                                          fill=SLIME_COLOUR)
 def new_game():
     global slime_vel
     global score, score_label,lives,paused
@@ -152,7 +154,7 @@ def collision(v1,x1,m1,v2,x2,m2):
 
 
 def dynamics():
-	global score,ball_pos, ball_vel,slime_vel,m1,m2,collide,jump,bricks,lives,lives_label,invincibility,paused,mm
+	global score,ball_pos, ball_vel,slime_vel,m1,m2,collide,jump,bricks,lives,lives_label,invincibility,paused,mm,jump2
 	endgame = False
 	bx,by      = find_centre(canvas.coords(ball))
 	sx,sy      = find_centre(canvas.coords(slime))
@@ -164,6 +166,7 @@ def dynamics():
 		jump = True
 	else:
 		jump = False
+		jump2= False
 	
 	vec        = np.array([bx-sx,by-sy])
 	mag        = np.sqrt(vec[0]**2. + vec[1]**2.)
@@ -350,7 +353,7 @@ def dynamics():
 
 
 def KeyPressed(event):
-    global slime_vel,jump,collide,paused
+    global slime_vel,jump,collide,paused,jump2
     if event.char == 'p':
 		if paused:
 			paused = False
@@ -361,10 +364,15 @@ def KeyPressed(event):
         slime_vel[0] = -1.*slime_acc
     elif event.char == 'd':
         slime_vel[0] = slime_acc
+    elif event.char == 's':
+        slime_vel[1] += slime_acc/2.
     elif event.char == 'w':
-        if jump == False: 
+        if jump == False and jump2 == False: 
+	    slime_vel[1] = -1.*slime_acc/2.
+	elif jump == True and jump2 == False:
             slime_vel[1] = -1.*slime_acc/2.
-        else:
+	    jump2 = True
+	else:
             pass
     elif event.char == 'r':
 		canvas.delete('all')
@@ -372,11 +380,13 @@ def KeyPressed(event):
 
 
 def KeyReleased(event):
-    global slime_vel,jump
+    global slime_vel,jump,jump2
     if event.char == 'a':
         slime_vel[0] = 0.
     elif event.char == 'd':
         slime_vel[0] = 0.
+    elif event.char == 's':
+        slime_vel[1] = 0.
     elif event.char == 'w':
         pass
     elif event.char == 'r':
@@ -408,6 +418,8 @@ def make_menu():
 	fileMenu.add_command(label="level 7", command=lambda: new_level(7))
 	fileMenu.add_command(label="level 8", command=lambda: new_level(8))
 	fileMenu.add_command(label="level 9", command=lambda: new_level(9))
+	fileMenu.add_command(label="level 10", command=lambda: new_level(10))
+	fileMenu.add_command(label="level 11", command=lambda: new_level(11))
 	fileMenu.add_command(label="Exit", command=quit)
 	menubar.add_cascade(label="Levels", menu=fileMenu)
 
@@ -447,6 +459,12 @@ def new_level(N):
 	if N == 9: 
 		canvas, bricks = slv.level_9(canvas)
 		lvl = 9
+	if N == 10: 
+		canvas, bricks = slv.level_10(canvas)
+		lvl = 10
+	if N == 11: 
+		canvas, bricks = slv.level_11(canvas)
+		lvl = 11
 	dynamics()
 	return
 

@@ -70,22 +70,27 @@ def level_1(canvas):
 	return canvas,bricks
 
 def level_3(canvas):
+	phi = 30
+	phi *= math.pi/180.
+	
+	rb1pos    = [WIDTH/4,         HEIGHT/3.]
+	bb1pos    = [WIDTH/4,         HEIGHT/3.+BRICK_R_r+BRICK_B_r]
+	bb2pos    = [WIDTH/4-(BRICK_R_r+BRICK_B_r)*math.cos(phi),HEIGHT/3.-(BRICK_R_r+BRICK_B_r)*math.sin(phi)]
+	bb3pos    = [WIDTH/4+(BRICK_R_r+BRICK_B_r)*math.cos(phi),HEIGHT/3.-(BRICK_R_r+BRICK_B_r)*math.sin(phi)]
+	
+	rb2pos    = [3.*WIDTH/4,         HEIGHT/3.]
+	bb4pos    = [3.*WIDTH/4,         HEIGHT/3.+BRICK_R_r+BRICK_B_r]
+	bb5pos    = [3.*WIDTH/4-(BRICK_R_r+BRICK_B_r)*math.cos(phi),HEIGHT/3.-(BRICK_R_r+BRICK_B_r)*math.sin(phi)]
+	bb6pos    = [3.*WIDTH/4+(BRICK_R_r+BRICK_B_r)*math.cos(phi),HEIGHT/3.-(BRICK_R_r+BRICK_B_r)*math.sin(phi)]
+	
+	phi = 30
+	phi *= math.pi/180.
+	bb7pos    = [WIDTH/2,         2.*HEIGHT/3.]
+	rb3pos    = [WIDTH/2,         2.*HEIGHT/3.-BRICK_R_r-BRICK_B_r]
+	rb4pos    = [WIDTH/2-(BRICK_R_r+BRICK_B_r)*math.cos(phi),2.*HEIGHT/3.+(BRICK_R_r+BRICK_B_r)*math.sin(phi)]
+	rb5pos    = [WIDTH/2+(BRICK_R_r+BRICK_B_r)*math.cos(phi),2.*HEIGHT/3.+(BRICK_R_r+BRICK_B_r)*math.sin(phi)]
 
-	rb1pos    = [WIDTH/2.-BRICK_R_r,         HEIGHT/4.]
-	rb2pos    = [WIDTH/2.-BRICK_R_r,      3.*HEIGHT/4.]
-	rb3pos    = [WIDTH/2.+BRICK_R_r,         HEIGHT/2.]
 
-	bb1pos    = [WIDTH/2.+BRICK_R_r,         HEIGHT/4.]
-	bb2pos    = [WIDTH/2.+BRICK_R_r,      3.*HEIGHT/4.]
-	bb3pos    = [WIDTH/2.-BRICK_R_r,         HEIGHT/2.]
-
-	rb4pos    = [WIDTH/2.-BRICK_R_r+4.*BRICK_R_r,   HEIGHT/4.]
-	rb5pos    = [WIDTH/2.-BRICK_R_r+4.*BRICK_R_r,3.*HEIGHT/4.]
-	rb6pos    = [WIDTH/2.+BRICK_R_r+4.*BRICK_R_r,   HEIGHT/2.]
-	                                                     
-	bb4pos    = [WIDTH/2.+BRICK_R_r+4.*BRICK_R_r,   HEIGHT/4.]
-	bb5pos    = [WIDTH/2.+BRICK_R_r+4.*BRICK_R_r,3.*HEIGHT/4.]
-	bb6pos    = [WIDTH/2.-BRICK_R_r+4.*BRICK_R_r,   HEIGHT/2.]
 	
 	blubrick1 = canvas.create_oval(bb1pos[0]-BRICK_B_r,bb1pos[1]+BRICK_B_r,bb1pos[0]+BRICK_B_r,bb1pos[1]-BRICK_B_r, 
                                           fill=BRICK_B_COL)
@@ -117,25 +122,25 @@ def level_3(canvas):
                                           fill=BRICK_B_COL)
 	blubrick6 = canvas.create_oval(bb6pos[0]-BRICK_B_r,bb6pos[1]+BRICK_B_r,bb6pos[0]+BRICK_B_r,bb6pos[1]-BRICK_B_r, 
                                           fill=BRICK_B_COL)
+	blubrick7 = canvas.create_oval(bb7pos[0]-BRICK_B_r,bb7pos[1]+BRICK_B_r,bb7pos[0]+BRICK_B_r,bb7pos[1]-BRICK_B_r, 
+                                          fill=BRICK_B_COL)
 	blub4 = {'radius': BRICK_B_r,'mass': BRICK_B_m, 'tag': blubrick4,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
 					'color':'blu','start_pos': bb4pos}
 	blub5 = {'radius': BRICK_B_r,'mass': BRICK_B_m, 'tag': blubrick5,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
 					'color':'blu','start_pos': bb5pos}
 	blub6 = {'radius': BRICK_B_r,'mass': BRICK_B_m, 'tag': blubrick6,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
 					'color':'blu','start_pos': bb6pos}
+	blub7 = {'radius': BRICK_B_r,'mass': BRICK_B_m, 'tag': blubrick7,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
+					'color':'blu','start_pos': bb7pos}
 	redbrick4 = canvas.create_oval(rb4pos[0]-BRICK_R_r,rb4pos[1]+BRICK_R_r,rb4pos[0]+BRICK_R_r,rb4pos[1]-BRICK_R_r, 
                                           fill=BRICK_R_COL)
 	redbrick5 = canvas.create_oval(rb5pos[0]-BRICK_R_r,rb5pos[1]+BRICK_R_r,rb5pos[0]+BRICK_R_r,rb5pos[1]-BRICK_R_r, 
-                                          fill=BRICK_R_COL)
-	redbrick6 = canvas.create_oval(rb6pos[0]-BRICK_R_r,rb6pos[1]+BRICK_R_r,rb6pos[0]+BRICK_R_r,rb6pos[1]-BRICK_R_r, 
                                           fill=BRICK_R_COL)
 	redb4 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick4,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
 					'color':'red','start_pos': rb4pos}
 	redb5 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick5,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
 					'color':'red','start_pos': rb5pos}
-	redb6 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick6,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
-					'color':'red','start_pos': rb6pos}
-	bricks  = [redb1,redb2,redb3,redb4,redb5,redb6,blub1,blub2,blub3,blub4,blub5,blub6]
+	bricks  = [redb1,redb2,redb3,redb4,redb5,blub1,blub2,blub3,blub4,blub5,blub6,blub7]
 	return canvas,bricks
 
 def level_4(canvas):
@@ -232,7 +237,7 @@ def level_5(canvas):
 	bricks_original  = [redb1,redb2,blub1,magb1]
 	return canvas,bricks
 
-def level_6(canvas):
+def level_8(canvas):
 
 	mb1pos    = [WIDTH-BRICK_M_r,         HEIGHT/4.]
 	mb2pos    = [WIDTH-BRICK_M_r,      3.*HEIGHT/4.]
@@ -257,7 +262,7 @@ def level_6(canvas):
 	bricks  = [magb1,magb2,magb3,cyab1]
 	return canvas,bricks
 
-def level_8(canvas):
+def level_9(canvas):
 
 	mb1pos    = [WIDTH-BRICK_M_r,         HEIGHT/4.]
 	mb2pos    = [WIDTH-BRICK_M_r,      3.*HEIGHT/4.]
@@ -292,51 +297,96 @@ def level_8(canvas):
 	bricks  = [magb1,magb2,magb3,cyab1,cyab2,cyab3]
 	return canvas,bricks
 
-def level_7(canvas):
+def level_6(canvas):
 
-	mb1pos    = [WIDTH-BRICK_M_r,         HEIGHT/4.]
-	rb1pos    = [WIDTH-BRICK_R_r,      3.*HEIGHT/4.]
-	bb1pos    = [WIDTH-BRICK_B_r,         HEIGHT/2.]
-	cb1pos    = [WIDTH-2*BRICK_B_r-BRICK_C_r,      HEIGHT/2.]
-	mb2pos    = [WIDTH-2*BRICK_R_r-BRICK_M_r,   3.*HEIGHT/4.]
-	rb2pos    = [WIDTH-2.*BRICK_M_r-BRICK_R_r,      HEIGHT/4.]
+	
+	phi = 30
+	phi *= math.pi/180.
+	wb1pos    = [WIDTH/2,         HEIGHT/2.]
+	mb1pos    = [WIDTH/2,         HEIGHT/2.-BRICK_W_r-BRICK_M_r]
+	mb2pos    = [WIDTH/2-(BRICK_M_r+BRICK_W_r)*math.cos(phi),HEIGHT/2.+(BRICK_M_r+BRICK_W_r)*math.sin(phi)]
+	mb3pos    = [WIDTH/2+(BRICK_M_r+BRICK_W_r)*math.cos(phi),HEIGHT/2.+(BRICK_M_r+BRICK_W_r)*math.sin(phi)]
+	
 	magbrick1 = canvas.create_oval(mb1pos[0]-BRICK_M_r,mb1pos[1]+BRICK_M_r,mb1pos[0]+BRICK_M_r,mb1pos[1]-BRICK_M_r, 
                                           fill=BRICK_M_COL)
 	magbrick2 = canvas.create_oval(mb2pos[0]-BRICK_M_r,mb2pos[1]+BRICK_M_r,mb2pos[0]+BRICK_M_r,mb2pos[1]-BRICK_M_r, 
                                           fill=BRICK_M_COL)
-	redbrick1 = canvas.create_oval(rb1pos[0]-BRICK_R_r,rb1pos[1]+BRICK_R_r,rb1pos[0]+BRICK_R_r,rb1pos[1]-BRICK_R_r, 
-                                          fill=BRICK_R_COL)
-	redbrick2 = canvas.create_oval(rb2pos[0]-BRICK_R_r,rb2pos[1]+BRICK_R_r,rb2pos[0]+BRICK_R_r,rb2pos[1]-BRICK_R_r, 
-                                          fill=BRICK_R_COL)
-	cyabrick1 = canvas.create_oval(cb1pos[0]-BRICK_C_r,cb1pos[1]+BRICK_C_r,cb1pos[0]+BRICK_C_r,cb1pos[1]-BRICK_C_r, 
-                                          fill=BRICK_C_COL)
-	blubrick1 = canvas.create_oval(bb1pos[0]-BRICK_B_r,bb1pos[1]+BRICK_B_r,bb1pos[0]+BRICK_B_r,bb1pos[1]-BRICK_B_r, 
-                                          fill=BRICK_B_COL)
+	magbrick3 = canvas.create_oval(mb3pos[0]-BRICK_M_r,mb3pos[1]+BRICK_M_r,mb3pos[0]+BRICK_M_r,mb3pos[1]-BRICK_M_r, 
+                                          fill=BRICK_M_COL)
+	whtbrick1 = canvas.create_oval(wb1pos[0]-BRICK_W_r,wb1pos[1]+BRICK_W_r,wb1pos[0]+BRICK_W_r,wb1pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtb1 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
+					'color':'wht','start_pos': wb1pos}
 	magb1 = {'radius': BRICK_M_r,'mass': BRICK_M_m, 'tag': magbrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
 					'color':'mag','start_pos': mb1pos}
 	magb2 = {'radius': BRICK_M_r,'mass': BRICK_M_m, 'tag': magbrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
 					'color':'mag','start_pos': mb2pos}
-	redb1 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
-					'color':'red','start_pos': rb1pos}
-	redb2 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
-					'color':'red','start_pos': rb2pos}
+	magb3 = {'radius': BRICK_M_r,'mass': BRICK_M_m, 'tag': magbrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
+					'color':'mag','start_pos': mb3pos}
+	bricks  = [magb1,magb2,magb3,whtb1]
+	return canvas,bricks
+def level_7(canvas):
+
+	wb1pos    = [0,          HEIGHT/2.]
+	wb2pos    = [WIDTH/4.,   HEIGHT/2.]
+	wb3pos    = [WIDTH/2.,   HEIGHT/2.]
+	wb4pos    = [3.*WIDTH/4.,HEIGHT/2.]
+	wb5pos    = [WIDTH,      HEIGHT/2.]
+	
+
+	cb1pos    = [WIDTH/4.,      HEIGHT/4.]
+	cb2pos    = [WIDTH/2.,      HEIGHT/4.]
+	cb3pos    = [3.*WIDTH/4.,   HEIGHT/4.]
+
+	whtbrick1 = canvas.create_oval(wb1pos[0]-BRICK_W_r,wb1pos[1]+BRICK_W_r,wb1pos[0]+BRICK_W_r,wb1pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick2 = canvas.create_oval(wb2pos[0]-BRICK_W_r,wb2pos[1]+BRICK_W_r,wb2pos[0]+BRICK_W_r,wb2pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick3 = canvas.create_oval(wb3pos[0]-BRICK_W_r,wb3pos[1]+BRICK_W_r,wb3pos[0]+BRICK_W_r,wb3pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick4 = canvas.create_oval(wb4pos[0]-BRICK_W_r,wb4pos[1]+BRICK_W_r,wb4pos[0]+BRICK_W_r,wb4pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick5 = canvas.create_oval(wb5pos[0]-BRICK_W_r,wb5pos[1]+BRICK_W_r,wb5pos[0]+BRICK_W_r,wb5pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	
+	cyabrick1 = canvas.create_oval(cb1pos[0]-BRICK_C_r,cb1pos[1]+BRICK_C_r,cb1pos[0]+BRICK_C_r,cb1pos[1]-BRICK_C_r, 
+                                          fill=BRICK_C_COL)
+	cyabrick2 = canvas.create_oval(cb2pos[0]-BRICK_C_r,cb2pos[1]+BRICK_C_r,cb2pos[0]+BRICK_C_r,cb2pos[1]-BRICK_C_r, 
+                                          fill=BRICK_C_COL)
+	cyabrick3 = canvas.create_oval(cb3pos[0]-BRICK_C_r,cb3pos[1]+BRICK_C_r,cb3pos[0]+BRICK_C_r,cb3pos[1]-BRICK_C_r, 
+                                          fill=BRICK_C_COL)
+
+	whtb1 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb1pos}
+	whtb2 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb2pos}
+	whtb3 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb3pos}
+	whtb4 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick4,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb4pos}
+	whtb5 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick5,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb5pos}
+	
 	cyab1 = {'radius': BRICK_C_r,'mass': BRICK_C_m, 'tag': cyabrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_C_hp,
 					'color':'cya','start_pos': cb1pos}
-	blub1 = {'radius': BRICK_B_r,'mass': BRICK_B_m, 'tag': blubrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_B_hp,
-					'color':'blu','start_pos': bb1pos}
-	bricks  = [magb1,magb2,redb1,redb2,cyab1,blub1]
+	cyab2 = {'radius': BRICK_C_r,'mass': BRICK_C_m, 'tag': cyabrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_C_hp,
+					'color':'cya','start_pos': cb2pos}
+	cyab3 = {'radius': BRICK_C_r,'mass': BRICK_C_m, 'tag': cyabrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_C_hp,
+					'color':'cya','start_pos': cb3pos}
+	bricks  = [whtb1,whtb2,whtb3,whtb4,whtb5,cyab1,cyab2,cyab3]
 	return canvas,bricks
 
 def level_2(canvas):
-	rb1pos    = [1.*WIDTH/3.-BRICK_R_r,      BRICK_R_r]
-	rb2pos    = [2.*WIDTH/3.-BRICK_R_r,      BRICK_R_r]
-	rb3pos    = [3.*WIDTH/3.-BRICK_R_r,      BRICK_R_r]
-	gb1pos    = [1.*WIDTH/3.-2*BRICK_R_r,  3*BRICK_R_r]
-	gb2pos    = [2.*WIDTH/3.-2*BRICK_R_r,  3*BRICK_R_r]
-	gb3pos    = [3.*WIDTH/3.-2*BRICK_R_r,  3*BRICK_R_r]
-	rb7pos    = [1.*WIDTH/3.-BRICK_R_r,    5*BRICK_R_r]
-	rb8pos    = [2.*WIDTH/3.-BRICK_R_r,    5*BRICK_R_r]
-	rb9pos    = [3.*WIDTH/3.-BRICK_R_r,    5*BRICK_R_r]
+	rb1pos    = [WIDTH/4.,      HEIGHT/2.]
+	rb2pos    = [WIDTH/2.,      HEIGHT/2.]
+	rb3pos    = [3*WIDTH/4.,    HEIGHT/2.]
+	
+	wb1pos    = [(rb1pos[0]+rb2pos[0])/2.,  HEIGHT/2.+BRICK_R_r]
+	wb2pos    = [(rb2pos[0]+rb3pos[0])/2.,  HEIGHT/2.+BRICK_R_r]
+	wb3pos    = [(rb1pos[0]+rb2pos[0])/2.,  HEIGHT/2.-BRICK_R_r]
+	wb4pos    = [(rb2pos[0]+rb3pos[0])/2.,  HEIGHT/2.-BRICK_R_r]
+	
+	
 	redbrick1 = canvas.create_oval(rb1pos[0]-BRICK_R_r,rb1pos[1]+BRICK_R_r,rb1pos[0]+BRICK_R_r,rb1pos[1]-BRICK_R_r, 
                                           fill=BRICK_R_COL)
 	redbrick2 = canvas.create_oval(rb2pos[0]-BRICK_R_r,rb2pos[1]+BRICK_R_r,rb2pos[0]+BRICK_R_r,rb2pos[1]-BRICK_R_r, 
@@ -349,34 +399,26 @@ def level_2(canvas):
 					'color':'red','start_pos': rb2pos}
 	redb3 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
 					'color':'red','start_pos': rb3pos}
-	grybrick1 = canvas.create_oval(gb1pos[0]-BRICK_R_r,gb1pos[1]+BRICK_R_r,gb1pos[0]+BRICK_R_r,gb1pos[1]-BRICK_R_r, 
-                                          fill=BRICK_G_COL)
-	grybrick2 = canvas.create_oval(gb2pos[0]-BRICK_R_r,gb2pos[1]+BRICK_R_r,gb2pos[0]+BRICK_R_r,gb2pos[1]-BRICK_R_r, 
-                                          fill=BRICK_G_COL)
-	grybrick3 = canvas.create_oval(gb3pos[0]-BRICK_R_r,gb3pos[1]+BRICK_R_r,gb3pos[0]+BRICK_R_r,gb3pos[1]-BRICK_R_r, 
-                                          fill=BRICK_G_COL)
-	gryb1 = {'radius': BRICK_G_r,'mass': BRICK_G_m, 'tag': grybrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_G_hp,
-					'color':'gry','start_pos': gb1pos}
-	gryb2 = {'radius': BRICK_G_r,'mass': BRICK_G_m, 'tag': grybrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_G_hp,
-					'color':'gry','start_pos': gb2pos}
-	gryb3 = {'radius': BRICK_G_r,'mass': BRICK_G_m, 'tag': grybrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_G_hp,
-					'color':'gry','start_pos': gb3pos}
-	redbrick7 = canvas.create_oval(rb7pos[0]-BRICK_R_r,rb7pos[1]+BRICK_R_r,rb7pos[0]+BRICK_R_r,rb7pos[1]-BRICK_R_r, 
-                                          fill=BRICK_R_COL)
-	redbrick8 = canvas.create_oval(rb8pos[0]-BRICK_R_r,rb8pos[1]+BRICK_R_r,rb8pos[0]+BRICK_R_r,rb8pos[1]-BRICK_R_r, 
-                                          fill=BRICK_R_COL)
-	redbrick9 = canvas.create_oval(rb9pos[0]-BRICK_R_r,rb9pos[1]+BRICK_R_r,rb9pos[0]+BRICK_R_r,rb9pos[1]-BRICK_R_r, 
-                                          fill=BRICK_R_COL)
-	redb7 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick7,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
-					'color':'red','start_pos': rb7pos}
-	redb8 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick8,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
-					'color':'red','start_pos': rb8pos}
-	redb9 = {'radius': BRICK_R_r,'mass': BRICK_R_m, 'tag': redbrick9,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_R_hp,
-					'color':'red','start_pos': rb9pos}
-	bricks  = [redb1,redb2,redb3,gryb1,gryb2,gryb3,redb7,redb8,redb9]
+	whtbrick1 = canvas.create_oval(wb1pos[0]-BRICK_W_r,wb1pos[1]+BRICK_W_r,wb1pos[0]+BRICK_W_r,wb1pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick2 = canvas.create_oval(wb2pos[0]-BRICK_W_r,wb2pos[1]+BRICK_W_r,wb2pos[0]+BRICK_W_r,wb2pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick3 = canvas.create_oval(wb3pos[0]-BRICK_W_r,wb3pos[1]+BRICK_W_r,wb3pos[0]+BRICK_W_r,wb3pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick4 = canvas.create_oval(wb4pos[0]-BRICK_W_r,wb4pos[1]+BRICK_W_r,wb4pos[0]+BRICK_W_r,wb4pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtb1 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb1pos}
+	whtb2 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb2pos}
+	whtb3 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb3pos}
+	whtb4 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick4,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb4pos}
+	bricks  = [whtb1,whtb2,whtb3,whtb4,redb1,redb2,redb3]
 	return canvas,bricks
 
-def level_9(canvas):
+def level_10(canvas):
 
 	wb1pos    = [3.*WIDTH/4.,       3.*BRICK_W_r]
 	wb2pos    = [WIDTH/2.,             HEIGHT/2.]
@@ -435,4 +477,65 @@ def level_9(canvas):
 	cyab5 = {'radius': BRICK_C_r,'mass': BRICK_C_m, 'tag': cyabrick5,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_C_hp,
 					'color':'cya','start_pos': cb5pos}
 	bricks  = [cyab1,cyab2,cyab3,cyab4,cyab5,whtb1,whtb2,whtb3,whtb4,whtb5]
+	return canvas,bricks
+
+def level_11(canvas):
+
+	wb1pos    = [WIDTH/2.,       HEIGHT]
+	wb2pos    = [0,    HEIGHT]
+	wb3pos    = [WIDTH,          HEIGHT]
+	wb4pos    = [WIDTH,    0]
+	wb5pos    = [0,          0]
+	
+	cb1pos    = [WIDTH/2.,      HEIGHT/2.]
+	mb1pos    = [WIDTH/2.+BRICK_M_r+BRICK_C_r,      HEIGHT/2.]
+	mb2pos    = [WIDTH/2.-BRICK_M_r-BRICK_C_r,      HEIGHT/2.]
+	mb3pos    = [WIDTH/2.,      HEIGHT/2.+BRICK_M_r+BRICK_C_r]
+	mb4pos    = [WIDTH/2.,      HEIGHT/2.-BRICK_M_r-BRICK_C_r]
+	
+	
+	whtbrick1 = canvas.create_oval(wb1pos[0]-BRICK_W_r,wb1pos[1]+BRICK_W_r,wb1pos[0]+BRICK_W_r,wb1pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick2 = canvas.create_oval(wb2pos[0]-BRICK_W_r,wb2pos[1]+BRICK_W_r,wb2pos[0]+BRICK_W_r,wb2pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick3 = canvas.create_oval(wb3pos[0]-BRICK_W_r,wb3pos[1]+BRICK_W_r,wb3pos[0]+BRICK_W_r,wb3pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick4 = canvas.create_oval(wb4pos[0]-BRICK_W_r,wb4pos[1]+BRICK_W_r,wb4pos[0]+BRICK_W_r,wb4pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	whtbrick5 = canvas.create_oval(wb5pos[0]-BRICK_W_r,wb5pos[1]+BRICK_W_r,wb5pos[0]+BRICK_W_r,wb5pos[1]-BRICK_W_r, 
+                                          fill=BRICK_W_COL)
+	
+	cyabrick1 = canvas.create_oval(cb1pos[0]-BRICK_C_r,cb1pos[1]+BRICK_C_r,cb1pos[0]+BRICK_C_r,cb1pos[1]-BRICK_C_r, 
+                                          fill=BRICK_C_COL)
+	magbrick1 = canvas.create_oval(mb1pos[0]-BRICK_M_r,mb1pos[1]+BRICK_M_r,mb1pos[0]+BRICK_M_r,mb1pos[1]-BRICK_M_r, 
+                                          fill=BRICK_M_COL)
+	magbrick2 = canvas.create_oval(mb2pos[0]-BRICK_M_r,mb2pos[1]+BRICK_M_r,mb2pos[0]+BRICK_M_r,mb2pos[1]-BRICK_M_r, 
+                                          fill=BRICK_M_COL)
+	magbrick3 = canvas.create_oval(mb3pos[0]-BRICK_M_r,mb3pos[1]+BRICK_M_r,mb3pos[0]+BRICK_M_r,mb3pos[1]-BRICK_M_r, 
+                                          fill=BRICK_M_COL)
+	magbrick4 = canvas.create_oval(mb4pos[0]-BRICK_M_r,mb4pos[1]+BRICK_M_r,mb4pos[0]+BRICK_M_r,mb4pos[1]-BRICK_M_r, 
+                                          fill=BRICK_M_COL)
+	
+	whtb1 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb1pos}
+	whtb2 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb2pos}
+	whtb3 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb3pos}
+	whtb4 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick4,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb4pos}
+	whtb5 = {'radius': BRICK_W_r,'mass': BRICK_W_m, 'tag': whtbrick5,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_W_hp,
+					'color':'wht','start_pos': wb5pos}
+	
+	cyab1 = {'radius': BRICK_C_r,'mass': BRICK_C_m, 'tag': cyabrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_C_hp,
+					'color':'cya','start_pos': cb1pos}
+	magb1 = {'radius': BRICK_M_r,'mass': BRICK_M_m, 'tag': magbrick1,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_M_hp,
+					'color':'mag','start_pos': mb1pos}
+	magb2 = {'radius': BRICK_M_r,'mass': BRICK_M_m, 'tag': magbrick2,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_M_hp,
+					'color':'mag','start_pos': mb2pos}
+	magb3 = {'radius': BRICK_M_r,'mass': BRICK_M_m, 'tag': magbrick3,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_M_hp,
+					'color':'mag','start_pos': mb3pos}
+	magb4 = {'radius': BRICK_M_r,'mass': BRICK_M_m, 'tag': magbrick4,'xvel':0.,'yvel':0.,'collide':False,'ballcol':False,'HP':BRICK_M_hp,
+					'color':'mag','start_pos': mb4pos}
+	bricks  = [cyab1,magb1,magb2,magb3,magb4,whtb1,whtb2,whtb3,whtb4,whtb5]
 	return canvas,bricks
