@@ -49,7 +49,6 @@ import string
 import random
 import slimeball_levels as slv
 
-
 WIDTH = 1000.
 HEIGHT = 500.
 BALL_RADIUS = 14.
